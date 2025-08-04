@@ -1,20 +1,16 @@
 import streamlit as st
 from google.cloud import dialogflowcx_v3beta1 as dialogflowcx
 import uuid
-import os
-import json
 
-# Load credentials (you can also use environment variable instead of file)
-SERVICE_ACCOUNT_FILE = "service_account.json"
+# Define your GCP project and agent details
 PROJECT_ID = "aichatbot-459310"
 LOCATION = "us-central1"
 AGENT_ID = "c332d7e4-2fea-4602-921e-c9894af54958"
 LANGUAGE_CODE = "en"
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_FILE
-
 @st.cache_resource
 def get_session_client():
+    # This uses default credentials (from gcloud or GCP environment)
     return dialogflowcx.SessionsClient()
 
 def detect_intent_texts(text_input, session_id):
